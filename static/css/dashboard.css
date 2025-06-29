@@ -1,0 +1,171 @@
+/* Custom Dashboard Styles - Hacker Theme */
+
+:root {
+    --hacker-bg: #0a0a0a; /* Very dark background */
+    --hacker-text: #00ff00; /* Neon green text */
+    --hacker-accent: #008000; /* Darker green for accents */
+    --hacker-surface: #1a1a1a; /* Slightly lighter dark for cards/panels */
+    --hacker-border: #004d00; /* Dark green border */
+    --hacker-shadow: 0 0 10px rgba(0, 255, 0, 0.5); /* Green glow effect */
+    --hacker-font: 'Fira Code', 'Hack', 'Courier New', monospace;
+    --transition: all 0.3s ease-in-out;
+}
+
+body {
+    font-family: var(--hacker-font);
+    background-color: var(--hacker-bg);
+    color: var(--hacker-text);
+    transition: var(--transition);
+}
+
+/* Override Bootstrap defaults for a darker theme */
+.bg-light {
+    background-color: var(--hacker-surface) !important;
+}
+
+.text-dark {
+    color: var(--hacker-text) !important;
+}
+
+.sidebar {
+    background-color: var(--hacker-surface);
+    border-right: 1px solid var(--hacker-border);
+    box-shadow: var(--hacker-shadow);
+}
+
+.sidebar .nav-link {
+    color: var(--hacker-text);
+    transition: var(--transition);
+}
+
+.sidebar .nav-link.active {
+    color: var(--hacker-text);
+    background-color: var(--hacker-accent);
+    border-radius: 0.25rem;
+}
+
+.sidebar .nav-link:hover {
+    color: var(--hacker-text);
+    background-color: var(--hacker-accent);
+    transform: translateX(5px);
+}
+
+.logo span {
+    color: var(--hacker-text);
+}
+
+.card {
+    border: 1px solid var(--hacker-border);
+    box-shadow: var(--hacker-shadow);
+    background-color: var(--hacker-surface);
+    color: var(--hacker-text);
+    transition: var(--transition);
+}
+
+.card-header {
+    background-color: var(--hacker-accent);
+    color: var(--hacker-bg);
+    border-bottom: 1px solid var(--hacker-border);
+}
+
+.table {
+    color: var(--hacker-text);
+}
+
+.table thead th {
+    border-bottom: 1px solid var(--hacker-border);
+}
+
+.table tbody tr {
+    border-bottom: 1px solid var(--hacker-border);
+}
+
+.table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.list-group-item {
+    background-color: var(--hacker-surface);
+    color: var(--hacker-text);
+    border: 1px solid var(--hacker-border);
+}
+
+/* Stat cards - adjust colors for hacker theme */
+.card.bg-primary { background-color: var(--hacker-accent) !important; }
+.card.bg-success { background-color: var(--hacker-accent) !important; }
+.card.bg-warning { background-color: var(--hacker-accent) !important; }
+.card.bg-danger { background-color: var(--hacker-accent) !important; }
+
+.card.text-white { color: var(--hacker-bg) !important; }
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--hacker-accent);
+    border-color: var(--hacker-accent);
+    color: var(--hacker-bg);
+}
+
+.btn-primary:hover {
+    background-color: var(--hacker-text);
+    border-color: var(--hacker-text);
+    color: var(--hacker-bg);
+    box-shadow: var(--hacker-shadow);
+}
+
+.btn-secondary {
+    background-color: var(--hacker-surface);
+    border-color: var(--hacker-border);
+    color: var(--hacker-text);
+}
+
+.btn-secondary:hover {
+    background-color: var(--hacker-accent);
+    border-color: var(--hacker-text);
+    color: var(--hacker-bg);
+    box-shadow: var(--hacker-shadow);
+}
+
+/* Badges */
+.badge.bg-success { background-color: var(--hacker-accent) !important; color: var(--hacker-bg) !important; }
+.badge.bg-warning { background-color: #ffc107 !important; color: #000 !important; } /* Keep warning visible */
+.badge.bg-danger { background-color: #dc3545 !important; color: #fff !important; } /* Keep danger visible */
+
+/* Forms */
+.form-control {
+    background-color: var(--hacker-surface);
+    color: var(--hacker-text);
+    border: 1px solid var(--hacker-border);
+}
+
+.form-control:focus {
+    background-color: var(--hacker-surface);
+    color: var(--hacker-text);
+    border-color: var(--hacker-text);
+    box-shadow: 0 0 0 0.25rem rgba(0, 255, 0, 0.25);
+}
+
+.form-label {
+    color: var(--hacker-text);
+}
+
+/* Modals */
+.modal-content {
+    background-color: var(--hacker-surface);
+    color: var(--hacker-text);
+    border: 1px solid var(--hacker-border);
+    box-shadow: var(--hacker-shadow);
+}
+
+.modal-header {
+    background-color: var(--hacker-accent);
+    color: var(--hacker-bg);
+    border-bottom: 1px solid var(--hacker-border);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--hacker-border);
+}
+
+.btn-close {
+    filter: invert(1) hue-rotate(180deg) brightness(2); /* Make close button visible on dark background */
+}

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deemee Admin Dashboard - Tasks</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Modern admin dashboard with Bootstrap">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/favicon_io/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon_io/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon_io/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='images/favicon_io/site.webmanifest') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <div class="logo d-flex align-items-center px-3">
+                        <img src="{{ url_for('static', filename='images/admin.jpg') }}" alt="Deemee Logo" width="40" height="40" class="rounded-circle me-2">
+                        <span class="fs-5 fw-bold">Deemee</span>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('dashboard') }}">
+                                <i class="fas fa-home"></i>
+                                <span class="ms-2">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('profile') }}">
+                                <i class="fas fa-user"></i>
+                                <span class="ms-2">Profile</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('wallet') }}">
+                                <i class="fas fa-wallet"></i>
+                                <span class="ms-2">Wallet</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('analytics') }}">
+                                <i class="fas fa-chart-bar"></i>
+                                <span class="ms-2">Analytics</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">
+                                <i class="fas fa-tasks"></i>
+                                <span class="ms-2">Tasks</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('settings') }}">
+                                <i class="fas fa-cog"></i>
+                                <span class="ms-2">Settings</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-question-circle"></i>
+                                <span class="ms-2">Help</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('logout') }}">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span class="ms-2">Log out</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Tasks</h1>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task</button>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                To-Do
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush" id="todo-list">
+                                    <!-- To-do items will be populated by JavaScript -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Add Task Modal -->
+    <div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTaskModalLabel">Add Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addTaskForm">
+                        <div class="mb-3">
+                            <label for="taskName" class="form-label">Task Name</label>
+                            <input type="text" class="form-control" id="taskName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="taskDueDate" class="form-label">Due Date</label>
+                            <input type="date" class="form-control" id="taskDueDate" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save task</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const todoList = document.getElementById('todo-list');
+            const addTaskForm = document.getElementById('addTaskForm');
+
+            function fetchTasks() {
+                fetch('/api/tasks')
+                    .then(response => response.json())
+                    .then(tasks => {
+                        todoList.innerHTML = ''; // Clear existing tasks
+                        tasks.forEach(task => {
+                            const listItem = document.createElement('li');
+                            listItem.className = 'list-group-item';
+                            listItem.innerHTML = `
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <input class="form-check-input me-2" type="checkbox" value="" id="task-${task.id}" ${task.completed ? 'checked' : ''}>
+                                        <label class="form-check-label" for="task-${task.id}">${task.name}</label>
+                                    </div>
+                                    <div>
+                                        <span class="badge bg-primary rounded-pill me-2">${task.due_date}</span>
+                                        <button class="btn btn-sm btn-danger delete-task-btn" data-task-id="${task.id}">Delete</button>
+                                    </div>
+                                </div>
+                            `;
+                            todoList.appendChild(listItem);
+
+                            // Add event listener for checkbox
+                            const checkbox = listItem.querySelector(`#task-${task.id}`);
+                            checkbox.addEventListener('change', function() {
+                                fetch(`/api/tasks/${task.id}`, {
+                                    method: 'PUT',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({ completed: this.checked })
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    console.log(data.message);
+                                })
+                                .catch(error => console.error('Error updating task:', error));
+                            });
+
+                            // Add event listener for delete button
+                            const deleteButton = listItem.querySelector(`.delete-task-btn`);
+                            deleteButton.addEventListener('click', function() {
+                                fetch(`/api/tasks/${task.id}`, {
+                                    method: 'DELETE'
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    alert(data.message);
+                                    fetchTasks(); // Refresh the list
+                                })
+                                .catch(error => console.error('Error deleting task:', error));
+                            });
+                        });
+                    })
+                    .catch(error => console.error('Error fetching tasks:', error));
+            }
+
+            addTaskForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const taskName = document.getElementById('taskName').value;
+                const taskDueDate = document.getElementById('taskDueDate').value;
+
+                fetch('/api/tasks', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name: taskName, due_date: taskDueDate })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    const addTaskModal = bootstrap.Modal.getInstance(document.getElementById('addTaskModal'));
+                    addTaskModal.hide();
+                    addTaskForm.reset();
+                    fetchTasks(); // Refresh the list
+                })
+                .catch(error => console.error('Error adding task:', error));
+            });
+
+            // Initial fetch of tasks
+            fetchTasks();
+        });
+    </script>
+</body>
+</html>
+    
